@@ -54,7 +54,10 @@ const createService = async (req, res) => {
     }
 
     try{
-        const organization_id = await Organization.findOne({name: organization_name})._id
+        const organization = await Organization.findOne({name: organization_name})
+        if(!organization){
+            organization_id = null
+        }
         const service = await Service.create({name, duration, organization_id})
         res.status(200).json(service)
     }catch (error){
@@ -113,11 +116,16 @@ const updateService = async (req, res) => {
             return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
         }
 
-        const organization_id = await Organization.findOne({name: organization_name})._id
+        const organization = await Organization.findOne({name: organization_name})
+        if(!organization){
+            organization_id = null
+        }
 
-        const service = await Service.findOneAndUpdate({_id: id}, {
-            name, duration, organization_id
-        })
+        const service = await Service.findOneAndUpdate(
+            {_id: id}, 
+            {name, duration, organization_id},
+            { new: true }
+        )
 
         if(!service){
             return res.status(404).json({error: 'Service not Found'})

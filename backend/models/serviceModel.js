@@ -14,7 +14,6 @@ const serviceSchema = new Schema({
     organization_id: {
         type: Schema.Types.ObjectId,
         ref: 'Organization',
-        required: true
     }
 }, { timestamps: true })
 
