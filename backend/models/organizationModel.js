@@ -9,21 +9,21 @@ const organizationSchema = new Schema({
     },
     description: {
         type: String,
-        default: ""
+        default: " "
     },
     address: {
         type: String,
         required: true,
-        default: ""
+        default: " "
     },
     phoneNumber: Number,
     email: {
         type: String,
-        default: ""
+        default: " "
     },
     link: {
         type: String,
-        default: ""
+        default: " "
     },
     services: {
         type: [{ 

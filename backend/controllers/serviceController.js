@@ -1,4 +1,5 @@
 const Service = require('../models/serviceModel')
+const Organization = require('../models/organizationModel')
 const  mongoose = require('mongoose')
 
 // get all services
@@ -54,11 +55,11 @@ const createService = async (req, res) => {
     }
 
     try{
-        const organization = await Organization.findOne({name: organization_name})
+        let organization = await Organization.findOne({name: organization_name})
         if(!organization){
-            organization_id = null
+            organization = await Organization.findOne({name: " "})
         }
-        const service = await Service.create({name, duration, organization_id})
+        const service = await Service.create({name, duration, organization_id: organization._id})
         res.status(200).json(service)
     }catch (error){
         console.error('Error creating a service', error);
@@ -116,14 +117,14 @@ const updateService = async (req, res) => {
             return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
         }
 
-        const organization = await Organization.findOne({name: organization_name})
+        let organization = await Organization.findOne({name: organization_name})
         if(!organization){
-            organization_id = null
+            organization = await Organization.findOne({name: " "})
         }
 
         const service = await Service.findOneAndUpdate(
             {_id: id}, 
-            {name, duration, organization_id},
+            {name, duration, organization_id: organization._id},
             { new: true }
         )
 

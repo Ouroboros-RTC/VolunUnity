@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const serviceRoutes = require('./routes/services')
 const organizationRoutes = require('./routes/organizations')
 
 const app = express()
