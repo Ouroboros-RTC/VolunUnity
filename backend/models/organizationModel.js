@@ -7,18 +7,31 @@ const organizationSchema = new Schema({
         type: String,
         required: true
     },
-    description: String,
+    description: {
+        type: String,
+        default: ""
+    },
     address: {
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     phoneNumber: Number,
-    email: String,
-    link: String,
-    services: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Service',
-    }]
+    email: {
+        type: String,
+        default: ""
+    },
+    link: {
+        type: String,
+        default: ""
+    },
+    services: {
+        type: [{ 
+            type: Schema.Types.ObjectId,
+            ref: 'Service',
+        }],
+        default: []
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Organization', organizationSchema);
