@@ -18,9 +18,9 @@ const ServiceDetails = ({ service }) => {
 
     return (
         <div className="service-details">
-            <h4>{service.title}</h4>
-            <p><strong>Load (kg): </strong>{service.load}</p>
-            <p><strong>Reps: </strong>{service.reps}</p>
+            <h4>{service.name}</h4>
+            <p><strong>Duration(hours): </strong>{service.duration}</p>
+            {/* <p><strong>Organization: </strong>{service.organization_id}</p> */}
             <p>{formatDistanceToNow(new Date(service.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
