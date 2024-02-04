@@ -1,4 +1,5 @@
 const Service = require('../models/serviceModel')
+const Organization = require('../models/organizationModel')
 const  mongoose = require('mongoose')
 
 // get all services
@@ -12,8 +13,8 @@ const getServices = async (req, res) => {
     }
 }
 
-// get a single service
-const getService = async (req, res) => {
+// get a single service by id
+const getServiceById = async (req, res) => {
     try{
         const { id } = req.params
 
@@ -22,6 +23,22 @@ const getService = async (req, res) => {
         }
 
         const service = await Service.findById(id)
+
+        if(!service){
+            return res.status(404).json({error: 'Service not Found'})
+        }
+        res.status(200).json(service)
+    }catch( error ){
+        console.error('Error getting a service', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+// get a single service by name
+const getServiceByName = async (req, res) => {
+    const { name } = req.params
+    try{
+        const service = await Service.findOne({name})
 
         if(!service){
             return res.status(404).json({error: 'Service not Found'})
@@ -54,11 +71,11 @@ const createService = async (req, res) => {
     }
 
     try{
-        const organization = await Organization.findOne({name: organization_name})
+        let organization = await Organization.findOne({name: organization_name})
         if(!organization){
-            organization_id = null
+            organization = await Organization.findOne({name: " "})
         }
-        const service = await Service.create({name, duration, organization_id})
+        const service = await Service.create({name, duration, organization_id: organization._id})
         res.status(200).json(service)
     }catch (error){
         console.error('Error creating a service', error);
@@ -66,8 +83,8 @@ const createService = async (req, res) => {
     }
 }
 
-// delete a service
-const deleteService = async (req, res) => {
+// delete a service by id
+const deleteServiceById = async (req, res) => {
     const { id } = req.params
 
     try{
@@ -78,7 +95,7 @@ const deleteService = async (req, res) => {
         const service = await Service.findOneAndDelete({_id: id})
 
         if(!service){
-            return res.status(404).json({error: 'No such service'})
+            return res.status(404).json({error: 'Service not Found'})
         }
 
         res.status(200).json(service)
@@ -88,6 +105,23 @@ const deleteService = async (req, res) => {
     }
 }
 
+// delete a service by name
+const deleteServiceByName = async (req, res) => {
+    const { name } = req.body
+
+    try{
+        const service = await Service.findOneAndDelete({ name })
+
+        if(!service){
+            return res.status(404).json({error: 'Service not Found'})
+        }
+
+        res.status(200).json(service)
+    }catch (error){
+        console.error('Error deleting a service', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
 // update a service
 const updateService = async (req, res) => {
@@ -116,14 +150,14 @@ const updateService = async (req, res) => {
             return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
         }
 
-        const organization = await Organization.findOne({name: organization_name})
+        let organization = await Organization.findOne({name: organization_name})
         if(!organization){
-            organization_id = null
+            organization = await Organization.findOne({name: " "})
         }
 
         const service = await Service.findOneAndUpdate(
             {_id: id}, 
-            {name, duration, organization_id},
+            {name, duration, organization_id: organization._id},
             { new: true }
         )
 
@@ -141,8 +175,10 @@ const updateService = async (req, res) => {
 
 module.exports = {
     getServices,
-    getService,    
+    getServiceById,
+    getServiceByName,
     createService,
-    deleteService,
+    deleteServiceById,
+    deleteServiceByName,
     updateService
 }
