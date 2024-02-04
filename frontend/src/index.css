@@ -16,7 +16,7 @@ code {
 
 /* layout */
 :root {
-  --primary: #1aac83;
+  --primary: #8a6dff;
   --error: #e7195a;
 }
 body {
@@ -24,21 +24,58 @@ body {
   margin: 0;
   font-family: "Poppins";
 }
+
+
 header {
-  background: #fff;
+  background: #e9e3ff;
 }
 header .container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0px auto;
+  padding: 40px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: center;
+  background-color: #e9e3ff;
+  border-radius: 40px;
 }
 header a {
   color: #334;
   text-decoration: none;
+  margin: 0 auto;
+  
 }
+header img {
+  width: 80px; /* 设置宽度 */
+  height: 80px; /* 设置高度 */
+}
+header h1 {
+  font-size: 80px; 
+  font-weight: 400; /* Adjust the font size for h1 */
+  color: #212121; /* Change the color for h1 */
+  font-family: 'Galada', cursive;
+  margin: 0px auto;
+  margin-bottom: 0;
+}
+
+header h3 {
+  font-weight:400;
+  margin: 0px auto;
+  margin-bottom: 20px;
+}
+
+.highlight-hearts {
+  color: #8a6dff;
+  font-weight: 700;
+}
+
+.highlight-lives {
+  color: #8a6dff;
+  font-weight: 700;
+}
+
 .pages{
   /* background: #e7195a; */
   max-width: 1400px;
@@ -63,17 +100,22 @@ ul {
 }
 
 li {
-  margin-right: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
   
 }
 
-a{
-  color: #333;
+/* a{
+  color: #000000;
   text-decoration: none;
+} */
+
+button.active a {
+  color: #fafafa;
 }
 
 button {
-  background: #fff;
+  background:#e2e2e2;
   border: none;
   border-top-right-radius: 5px;
   font-family: "Poppins";
@@ -81,17 +123,22 @@ button {
   cursor: pointer;
   padding: 10px;
   transition: background 0.3s ease;
+  border-radius: 8px 8px 0 0;
+  a{
+  color: #212121;
+  text-decoration: none;
+  }
 }
 
-button:hover,
-button.active {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
 
+
+button:hover {
+  background:#d1d1d1;
+}
 button.active {
-  background: #cecece; 
-  border-radius: 4px;
+  background: #8a6dff; 
+  border-radius: 8px 8px 0 0;
+
 }
 
 
