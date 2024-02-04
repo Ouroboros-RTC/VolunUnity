@@ -1,13 +1,14 @@
 // fetch all workouts and list them in the home page
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import OrgsFilter from "../components/OrgsFilter";
 
 // components
 import OrganizationDetails from "../components/OrgsDetails"
-
 import { useOrganizationsContext } from "../hooks/useOrgsContext"
+import { useButtonClickContext } from '../context/buttonClickContext';
 
 const OrgsPage = () => {
+    const { buttonClickCount } = useButtonClickContext();
     const {organizations, dispatch} = useOrganizationsContext()
     useEffect(() => {
         const fetchOrganizations = async () => {
@@ -20,7 +21,7 @@ const OrgsPage = () => {
         }
 
         fetchOrganizations()
-    }, [dispatch])
+    }, [dispatch, buttonClickCount])
     
     return (
         <div className="page">
