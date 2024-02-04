@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ServicesContextProvider } from './context/ServicesContext';
+import { OrganizationsContextProvider } from './context/OrgsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <OrganizationsContextProvider>
     <ServicesContextProvider>
       <App />
     </ServicesContextProvider>
+    </OrganizationsContextProvider>
   </React.StrictMode>
 );
 

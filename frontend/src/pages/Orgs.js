@@ -1,5 +1,6 @@
 // fetch all workouts and list them in the home page
 import { useEffect } from "react"
+import OrgsFilter from "../components/OrgsFilter";
 
 // components
 import OrganizationDetails from "../components/OrgsDetails"
@@ -22,13 +23,13 @@ const OrgsPage = () => {
     }, [dispatch])
     
     return (
-        <div className="home">
+        <div className="page">
             <div className="organizations">
                 {organizations && organizations.map((organization) => (
                     <OrganizationDetails key={organization._id} organization={organization} />
                 ))}
             </div>
-            {/* <WorkoutForm /> */}
+            <OrgsFilter/>
         </div>
     )
 }

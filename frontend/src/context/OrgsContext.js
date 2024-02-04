@@ -2,7 +2,6 @@ import { createContext, useReducer } from 'react'
 
 export const OrganizationsContext = createContext()
 
-// reducer函数根据action的类型，实现操作
 export const organizationsReducer = (state, action) => {
 
     switch (action.type) {

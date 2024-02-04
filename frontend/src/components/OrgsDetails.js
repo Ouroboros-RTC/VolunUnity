@@ -20,12 +20,11 @@ const OrganizationDetails = ({ organization }) => {
         <div className="organization-details">
             <h4>{organization.name}</h4>
             <p><strong>Description: </strong>{organization.description}</p>
+            <p><strong>Tag: </strong>{organization.tag.name}</p>
             <p><strong>Address: </strong>{organization.address}</p>
             <p><strong>Phone number: </strong>{organization.phoneNumber}</p>
             <p><strong>Email: </strong>{organization.email}</p>
             <p><strong>Link: </strong>{organization.link}</p>
-            {/* <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p> */}
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
 }

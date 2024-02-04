@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Organizations from './pages/Organizations';
 import Navbar from './components/Navbar';
 import Tracker from './pages/Tracker';
 import Header from './components/Header';
+import OrgsPage  from './pages/Orgs';
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
       <Router>
         <div className='header'>
         <Header></Header>
+        <div className='home'>
         <div className='navbar'>
         <Navbar />
           <div className='pages'>
@@ -18,9 +19,10 @@ function App() {
               <Route 
                 path="/" element={<Tracker />} 
               />
-              <Route extact path="/organizations" element={<Organizations />} />
+              <Route extact path="/organizations" element={<OrgsPage />} />
             </Routes>
           </div>
+        </div>
         </div>
         </div>
       </Router>
