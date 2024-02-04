@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const serviceRoutes = require('./routes/services')
 const organizationRoutes = require('./routes/organizations')
+const tagRoutes = require('./routes/tags')
 
 const app = express()
 app.use(express.json())
@@ -14,6 +15,7 @@ app.use((req, res, next) => {
 
 app.use('/api', serviceRoutes)
 app.use('/api', organizationRoutes)
+app.use('/api', tagRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {

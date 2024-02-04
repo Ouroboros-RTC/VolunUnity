@@ -1,12 +1,14 @@
 const express = require('express')
 const {
     getOrganizations,
+    getOrganizationsByTag,
     getOrganizationById,
     getOrganizationByName,
     createOrganization,
     deleteOrganizationById,
     deleteOrganizationByName,
-    updateOrganization
+    updateOrganizationById,
+    updateOrganizationByName
 } = require('../controllers/organizationController')
 
 const router = express.Router()
@@ -14,6 +16,9 @@ const router = express.Router()
 
 // GET all organizations
 router.get('/organizations/', getOrganizations)
+
+// GET organizations by tag
+router.get('/organizations/tag/:id',getOrganizationsByTag)
 
 // GET a single organization by id
 router.get('/organizations/id/:id',getOrganizationById)
@@ -30,7 +35,10 @@ router.delete('/organizations/:id', deleteOrganizationById)
 // DELETE a organization by name
 router.delete('/organizations/', deleteOrganizationByName)
 
+// UPDATE a organization by id
+router.patch('/organizations/:id', updateOrganizationById)
+
 // UPDATE a organization
-router.patch('/organizations/:id', updateOrganization)
+router.patch('/organizations/', updateOrganizationByName)
 
 module.exports = router
