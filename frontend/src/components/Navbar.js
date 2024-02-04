@@ -15,7 +15,7 @@ const Navbar = () => {
                     className={activeButton === 1 ? 'active' : ''}
                     onClick={() => handleButtonClick(1)}
                 >
-                    <li>
+                    <li className='service-tracker'>
                         <Link to="/">Service Tracker</Link>
                     </li>
                 </button>
