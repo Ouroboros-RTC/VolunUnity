@@ -16,7 +16,7 @@ const Navbar = () => {
                     onClick={() => handleButtonClick(1)}
                 >
                     <li>
-                        <Link to="/">Tracker</Link>
+                        <Link to="/">Service Tracker</Link>
                     </li>
                 </button>
                 <button

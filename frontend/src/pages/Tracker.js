@@ -22,7 +22,6 @@ const Tracker = () => {
     return (
         <div className="home">
             <div className="services">
-                <div><h1>this is test</h1></div>
                 {services && services.map((service) => (
                     <ServiceDetails key={service._id} service={service} />
                 ))}
