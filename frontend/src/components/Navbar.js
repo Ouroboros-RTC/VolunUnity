@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react';
+import { useButtonClickContext } from '../context/buttonClickContext';
 
 const Navbar = () => {
     const [activeButton, setActiveButton] = useState(1);
+    const { incrementButtonClickCount } = useButtonClickContext();
 
     const handleButtonClick = (buttonNumber) => {
         setActiveButton(buttonNumber);
@@ -21,8 +23,8 @@ const Navbar = () => {
                 </button>
                 <button
                     className={activeButton === 2 ? 'active' : ''}
-                    onClick={() => handleButtonClick(2)}
-                >
+                    onClick={() => {handleButtonClick(2);
+                        incrementButtonClickCount();}}>
                     <li>
                         <Link to="/organizations">Organizations</Link>
                     </li>
