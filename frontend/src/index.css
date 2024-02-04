@@ -39,20 +39,21 @@ header a {
   color: #334;
   text-decoration: none;
 }
+
 .pages{
   /* background: #e7195a; */
   max-width: 1400px;
   padding: 20px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 
 /* Navbar */
 nav {
   background-color: #f1f1f1;
+  margin-top: 1em;
   margin-left: 2em;
   margin-right: 2em;
-  margin-top: 1em;
 }
 
 ul {
@@ -64,13 +65,14 @@ ul {
 
 li {
   margin-right: 20px;
-  
+  margin-left: 20px;
 }
 
 a{
   color: #333;
   text-decoration: none;
 }
+
 
 button {
   background: #fff;
@@ -96,7 +98,7 @@ button.active {
 
 
 /* tracker */
-.home {
+.page {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
@@ -104,11 +106,14 @@ button.active {
   margin-right: 2em;
 }
 
-.services {
+.pages{
+  padding: 0;
+}
+.services, .organization {
   margin:0;
 }
 
-.service-details {
+.service-details, .organization-details{
   background: #fff;
   border-radius: 4px;
   margin-top: 0;
@@ -117,18 +122,18 @@ button.active {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
-.service-details h4 {
+.service-details h4,.organization-details h4{
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
-.service-details p {
+.service-details p, .organization-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
 }
 
-.service-details span {
+.service-details span{
   position: absolute;
   top: 50%;
   right: 20px;
@@ -144,7 +149,7 @@ button.active {
   color: #333;
 }
 
-.service-details span svg {
+.service-details span svg{
   width: 70%; 
   height: auto;
   fill: #333;

@@ -20,7 +20,7 @@ const Tracker = () => {
     }, [dispatch]);
 
     return (
-        <div className="home">
+        <div className="page">
             <div className="services">
                 {services && services.map((service) => (
                     <ServiceDetails key={service._id} service={service} />

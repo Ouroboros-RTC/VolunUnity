@@ -22,13 +22,12 @@ const OrgsPage = () => {
     }, [dispatch])
     
     return (
-        <div className="home">
+        <div className="page">
             <div className="organizations">
                 {organizations && organizations.map((organization) => (
                     <OrganizationDetails key={organization._id} organization={organization} />
                 ))}
             </div>
-            {/* <WorkoutForm /> */}
         </div>
     )
 }

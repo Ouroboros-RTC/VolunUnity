@@ -24,8 +24,6 @@ const OrganizationDetails = ({ organization }) => {
             <p><strong>Phone number: </strong>{organization.phoneNumber}</p>
             <p><strong>Email: </strong>{organization.email}</p>
             <p><strong>Link: </strong>{organization.link}</p>
-            {/* <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p> */}
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
 }
