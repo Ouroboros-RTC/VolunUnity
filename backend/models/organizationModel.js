@@ -30,6 +30,10 @@ const organizationSchema = new Schema({
             ref: 'Service',
         }],
         default: []
+    },
+    tag:{
+        type: Schema.Types.ObjectId,
+        ref: 'Tag',
     }
 }, { timestamps: true })
 

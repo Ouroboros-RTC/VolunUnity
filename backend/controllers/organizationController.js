@@ -4,10 +4,22 @@ const  mongoose = require('mongoose')
 // get all organizations
 const getOrganizations = async (req, res) => {
     try{
-        const organizations = await Organization.find({}).sort({createdAt: -1})
+        const organizations = await Organization.find({}).sort({createdAt: -1}).populate('tag')
         res.status(200).json(organizations)
     }catch( error ){
         console.error('Error getting all organizations', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+// get all organizations associated with tag
+const getOrganizationsByTag = async (req, res) => {
+    const { id } = req.params
+    try{
+        const organizations = await Organization.find({tag: id}).sort({createdAt: -1}).populate('tag')
+        res.status(200).json(organizations)
+    }catch( error ){
+        console.error('Error getting all organizations associated with tag', error);
         res.status(500).send('Internal Server Error');
     }
 }
@@ -21,7 +33,7 @@ const getOrganizationById = async (req, res) => {
             return res.status(404).json({error: 'Invalid id'})
         }
 
-        const organization = await Organization.findById(id)
+        const organization = await Organization.findById(id).populate('tag')
 
         if(!organization){
             return res.status(404).json({error: 'Organization not Found'})
@@ -37,7 +49,7 @@ const getOrganizationById = async (req, res) => {
 const getOrganizationByName = async (req, res) => {
     try{
         const { name } = req.params
-        const organization = await Organization.findOne({name})
+        const organization = await Organization.findOne({name}).populate('tag')
 
         if(!organization){
             return res.status(404).json({error: 'Organization not Found'})
@@ -102,8 +114,8 @@ const deleteOrganizationByName = async (req, res) => {
 }
 
 
-// update a organization
-const updateOrganization = async (req, res) => {
+// update a organization by id
+const updateOrganizationById = async (req, res) => {
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -128,13 +140,36 @@ const updateOrganization = async (req, res) => {
     }
 }
 
+// update a organization by name
+const updateOrganizationByName = async (req, res) => {
+
+    try{
+        const organization = await Organization.findOneAndUpdate(
+            {name: req.body.name}, 
+            {...req.body},
+            { new: true }
+        )
+
+        if(!organization){
+            return res.status(404).json({error: 'Organization not Found'})
+        }
+
+        res.status(200).json(organization)
+    }catch (error){
+        console.error('Error updating a organization', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 
 module.exports = {
     getOrganizations,
+    getOrganizationsByTag,
     getOrganizationById,
     getOrganizationByName,
     createOrganization,
     deleteOrganizationById,
     deleteOrganizationByName,
-    updateOrganization
+    updateOrganizationById,
+    updateOrganizationByName
 }

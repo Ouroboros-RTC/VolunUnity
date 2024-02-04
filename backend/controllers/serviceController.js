@@ -61,10 +61,7 @@ const createService = async (req, res) => {
     if(!duration){
         emptyFields.push('duration')
     }
-    // if(!organization_name){
-    //     emptyFields.push('organization_name')
-    // }
-    console.log(emptyFields)
+
     if(emptyFields.length > 0){
         return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
     }
