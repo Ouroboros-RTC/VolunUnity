@@ -13,7 +13,6 @@ const organizationSchema = new Schema({
     },
     address: {
         type: String,
-        required: true,
         default: " "
     },
     phoneNumber: Number,

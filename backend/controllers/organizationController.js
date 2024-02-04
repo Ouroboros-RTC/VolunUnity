@@ -12,8 +12,8 @@ const getOrganizations = async (req, res) => {
     }
 }
 
-// get a single organization
-const getOrganization = async (req, res) => {
+// get a single organization by Id
+const getOrganizationById = async (req, res) => {
     try{
         const { id } = req.params
 
@@ -22,6 +22,22 @@ const getOrganization = async (req, res) => {
         }
 
         const organization = await Organization.findById(id)
+
+        if(!organization){
+            return res.status(404).json({error: 'Organization not Found'})
+        }
+        res.status(200).json(organization)
+    }catch( error ){
+        console.error('Error getting a organization', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+// get a single organization by name
+const getOrganizationByName = async (req, res) => {
+    try{
+        const { name } = req.params
+        const organization = await Organization.findOne({name})
 
         if(!organization){
             return res.status(404).json({error: 'Organization not Found'})
@@ -45,8 +61,8 @@ const createOrganization = async (req, res) => {
     }
 }
 
-// delete a organization
-const deleteOrganization = async (req, res) => {
+// delete a organization by Id
+const deleteOrganizationById = async (req, res) => {
     const { id } = req.params
 
     try{
@@ -57,7 +73,25 @@ const deleteOrganization = async (req, res) => {
         const organization = await Organization.findOneAndDelete({_id: id})
 
         if(!organization){
-            return res.status(404).json({error: 'No such organization'})
+            return res.status(404).json({error: 'Organization not Found'})
+        }
+
+        res.status(200).json(organization)
+    }catch (error){
+        console.error('Error deleting a organization', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+// delete a organization by name
+const deleteOrganizationByName = async (req, res) => {
+    const { name } = req.body
+
+    try{
+        const organization = await Organization.findOneAndDelete({name})
+
+        if(!organization){
+            return res.status(404).json({error: 'Organization not Found'})
         }
 
         res.status(200).json(organization)
@@ -97,8 +131,10 @@ const updateOrganization = async (req, res) => {
 
 module.exports = {
     getOrganizations,
-    getOrganization,    
+    getOrganizationById,
+    getOrganizationByName,
     createOrganization,
-    deleteOrganization,
+    deleteOrganizationById,
+    deleteOrganizationByName,
     updateOrganization
 }
