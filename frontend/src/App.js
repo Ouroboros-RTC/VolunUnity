@@ -4,22 +4,30 @@ import Organizations from './pages/Organizations';
 import Navbar from './components/Navbar';
 import Tracker from './pages/Tracker';
 import Header from './components/Header';
+import { ServicesContextProvider } from './context/ServicesContext';
 
 function App() {
   return (
-    <Router>
-      <div className='header'>
-      <Header></Header>
-       <div className='navbar'>
-       <Navbar />
-        <Routes>
-          <Route extact path="/" element={<Tracker />} />
-          <Route extact path="/organizations" element={<Organizations />} />
-        </Routes>
+    <ServicesContextProvider>
+    <div className="App">
+      <Router>
+        <div className='header'>
+        <Header></Header>
+        <div className='navbar'>
+        <Navbar />
+          <div className='pages'>
+            <Routes>
+              <Route 
+                path="/" element={<Tracker />} 
+              />
+              {/* <Route extact path="/organizations" element={<Organizations />} /> */}
+            </Routes>
+          </div>
+          </div>
         </div>
-      </div>
-    </Router>
-    
+      </Router>
+    </div>
+    </ServicesContextProvider>
   );
 }
 
