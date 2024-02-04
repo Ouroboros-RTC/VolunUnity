@@ -4,16 +4,16 @@ import { useServicesContext } from "../hooks/useServicesContext"
 
 const ServiceForm = () => {
     const { dispatch } = useServicesContext()
-    const [title, setTitle] = useState('')
-    const [load, setLoad] = useState('')
-    const [reps, setReps] = useState('')
+    const [name, setName] = useState('')
+    const [duration, setDuration] = useState('')
+    const [organization_name, setOrganization] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const service = {title, load, reps}
+        const service = {name, duration, organization_name}
 
         const response = await fetch('/api/services/', {
             method: 'POST',
@@ -29,44 +29,47 @@ const ServiceForm = () => {
             setEmptyFields(json.emptyFields)
         }
         if(response.ok){
-            setTitle('')
-            setLoad('')
-            setReps('')
+            setName('')
+            setDuration('')
+            setOrganization('')
             setError(null)
             setEmptyFields([])
             console.log('new service added', json)
             dispatch({type: 'CREATE_SERVICE', payload: json})
         }
+        
     }
+    
     return (
         <form className="create" onSubmit={handleSubmit}>
             <h3>Add a New Service</h3>
 
-            <label>Service Title:</label>
+            <label>Service Name:</label>
             <input 
                 type="text"
-                onChange={(e) => setTitle(e.target.value)}
-                value = {title}
-                className={emptyFields.includes('title') ? 'error': ''}
+                onChange={(e) => setName(e.target.value)}
+                value = {name}
+                className={emptyFields.includes('name') ? 'error': ''}
             />
 
-            <label>Load (in kg):</label>
+            <label>Duration(hours):</label>
             <input 
                 type="number"
-                onChange={(e) => setLoad(e.target.value)}
-                value = {load}
-                className={emptyFields.includes('load') ? 'error': ''}
+                onChange={(e) => setDuration(e.target.value)}
+                value = {duration}
+                // className={emptyFields.includes('duration') ? 'error': ''}
+                className={isNaN(duration) ? 'error' : ''}
             />
 
-            <label>Reps:</label>
+            <label>Organization:</label>
             <input 
-                type="number"
-                onChange={(e) => setReps(e.target.value)}
-                value = {reps}
-                className={emptyFields.includes('reps') ? 'error': ''}
+                type="text"
+                onChange={(e) => setOrganization(e.target.value)}
+                value = {organization_name}
+                // className={emptyFields.includes('organization') ? 'error' : ''}
             />
             
-            <button>Add Workout</button>
+            <button>Add Service</button>
             {error && <div className="error">{error}</div>}
         </form>
     )

@@ -104,6 +104,9 @@ button.active {
   margin-right: 2em;
 }
 
+.services {
+  margin:0;
+}
 
 .service-details {
   background: #fff;
@@ -124,19 +127,31 @@ button.active {
   font-size: 0.9em;
   color: #555;
 }
+
 .service-details span {
   position: absolute;
-  top: 20px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; 
+  height: 30px;
   background: #f1f1f1;
-  padding: 6px;
   border-radius: 50%;
   color: #333;
 }
 
+.service-details span svg {
+  width: 70%; 
+  height: auto;
+  fill: #333;
+}
 
-/* new workout form */
+
+/* new service form */
 label, input {
   display: block;
 }
