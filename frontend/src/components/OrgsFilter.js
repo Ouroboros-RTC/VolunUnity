@@ -39,7 +39,11 @@ const OrgsFilter = () => {
 
   return (
     <div>
-      <ul>
+      <ul className="tags">
+      <h2>
+        Filter
+        <hr className="line" />
+      </h2>
         {tags.map((tag) => (
           <li
             key={tag._id}
